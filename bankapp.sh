@@ -12,11 +12,15 @@ show_details() {
 }
 
 send_mail() {
+<<<<<<< HEAD
 	touch mail_contents.txt
 	echo "Subject: Your Bank details and new account number" > mail_contents.txt
 	result="$(show_details)"
 	echo $result >> mail_contents.txt 
 	ssmtp $1 < ./mail_contents.txt
+=======
+	echo -e "$(show_details)" | mutt -s "Your Bank Details and New Account Number" -- $email
+>>>>>>> b2c1d2a9b850eb600c8ad31f5fd2ecdbcdc106ea
 }
 
 openaccount() {
