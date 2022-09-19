@@ -16,7 +16,7 @@ send_mail() {
 	echo "Subject: Your Bank details and new account number" > mail_contents.txt
 	result="$(show_details)"
 	echo $result >> mail_contents.txt 
-	ssmtp $1 < mail_contents.txt
+	ssmtp $1 < ./mail_contents.txt
 }
 
 openaccount() {
@@ -55,6 +55,7 @@ openaccount() {
 	do
 	read -p "Enter a valid email address: " email
 	done
+
 	###
 	send_mail $email
 
