@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+catNumbers=""
+
 homepage() {
 	echo "Welcome to our App \n What will you like to do today?"
 	echo -e "1) Open an account \n2) Logout "
@@ -7,20 +9,35 @@ homepage() {
 }
 homepage
 
+generateRandomNumbers() {
+	lengthOfRandomNumbers=5
+
+	# Generates 5 different random numbers. Seq is a command meaning sequence
+	for n in `seq "$lengthOfRandomNumbers"`
+	do
+		randomNumber=$(shuf -i 10-100 -n1) #The shuf command works the same way as $RANDOM to generate random numbers
+		catNumbers+="${randomNumber}"	
+	done
+}
+
+generateRandomNumbers
+
 show_details() {
-	echo -e "Your details are \n First name: $first_name \n Last name: $last_name \n Account number: 0143123456"
+	#accountNumber=${generateRandomNumbers}
+	echo -e "Your details are \n First name: $first_name \n Last name: $last_name \n Account number: $catNumbers"
 }
 
 send_mail() {
-<<<<<<< HEAD
+#<<<<<<< HEAD
 	touch mail_contents.txt
-	echo "Subject: Your Bank details and new account number" > mail_contents.txt
-	result="$(show_details)"
-	echo $result >> mail_contents.txt 
-	ssmtp $1 < ./mail_contents.txt
-=======
+	#echo "Subject: Your Bank details and new account number" > mail_contents.txt
+	#result="$(show_details)"
+	#echo $result >> mail_contents.txt 
+	#ssmtp $1 < ./mail_contents.txt
+#=======
 	echo -e "$(show_details)" | mutt -s "Your Bank Details and New Account Number" -- $email
->>>>>>> b2c1d2a9b850eb600c8ad31f5fd2ecdbcdc106ea
+	#ssmtp $1 < ./mail_contents.txt 
+#>>>>>>> b2c1d2a9b850eb600c8ad31f5fd2ecdbcdc106ea
 }
 
 openaccount() {
